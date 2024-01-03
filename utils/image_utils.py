@@ -1,7 +1,7 @@
 
-import pathlib
 from PIL import Image
-def input_image_details(uploaded_file):
+
+def process_image(uploaded_file):
     """Processes an uploaded image and prepares it for the model.
 
     Args:
@@ -18,7 +18,10 @@ def input_image_details(uploaded_file):
         image_bytes = uploaded_file.getvalue()
 
         # Perform any necessary image processing here
-        # ...
+        # For example, resizing the image to a specific size
+        # image = Image.open(uploaded_file)
+        # resized_image = image.resize((desired_width, desired_height))
+        # image_bytes = resized_image.tobytes()
 
         # Prepare image parts for the model
         image_parts = [

@@ -1,8 +1,9 @@
+# app.py
 import streamlit as st
 from PIL import Image
-from config.config import GOOGLE_API_KEY
+from config.config import get_api_key
 from models.vision_model import VisionModel
-from utils.image_utils import input_image_details
+from utils.image_utils import process_image
 
 st.set_page_config(page_title="Multilanguage Invoice Extractor")
 
@@ -23,9 +24,10 @@ if uploaded_file is not None:
 submit = st.button("Tell me about the Invoice")
 
 if submit:
-    image_data = input_image_details(uploaded_file)
-    vision_model = VisionModel()
-    response = vision_model.generate_content([input_prompt, image_data[0], input_text])
-    
+    image_data = process_image(uploaded_file)
+    api_key = get_api_key()
+    vision_model = VisionModel(api_key)
+    response = vision_model.generate_response(input_text, image_data[0], input_prompt)
+
     st.subheader("The Response is")
-    st.write(response.text)
+    st.write(response)

@@ -7,4 +7,4 @@ class VisionModel:
 
     def generate_response(self, input_text, image_parts, prompt):
         response = self.model.generate_content([input_text, image_parts, prompt])
-        return response.text
+        return response.text  
